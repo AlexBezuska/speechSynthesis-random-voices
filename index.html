@@ -1,0 +1,36 @@
+<script>
+
+var ran = false;
+window.speechSynthesis.onvoiceschanged = function() {
+  if (!ran) {
+    var voices = window.speechSynthesis.getVoices();
+    var str = "Unless five million dollars are transferred to the following numbered account in seven days, I will capsize five tankers in the Ellingson fleet.";
+    var words = str.split(" ");
+
+    for(var i = 0; i < words.length; i++){
+      speakPhrase(words[i],voices);
+    }
+  }
+  ran = true;
+};
+
+function speakPhrase(phrase, voices) {
+  var speech = new SpeechSynthesisUtterance(phrase);
+  speech.default = false;
+  var voicePick = randomFrom(voices);
+  speech.voice = voicePick;
+  speech.pitch = 0;
+  window.speechSynthesis.speak(speech);
+}
+
+function randomInRange(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function randomFrom(array) {
+  var pick = Math.floor(Math.random() * array.length);
+  console.log(pick);
+  return array[pick];
+}
+
+</script>
