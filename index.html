@@ -18,8 +18,11 @@ function speakPhrase(phrase, voices) {
   var speech = new SpeechSynthesisUtterance(phrase);
   speech.default = false;
   var voicePick = randomFrom(voices);
-  speech.voice = voicePick;
-  speech.pitch = 0;
+  speech.voice = voices[voicePick];
+  var pitchPick = randomInRange(0,2).toFixed(2);
+  speech.pitch = pitchPick;
+  console.log("'" + phrase + "' spoken by " + voicePick + " " + voices[voicePick].name + " pitch: " + pitchPick);
+
   window.speechSynthesis.speak(speech);
 }
 
@@ -28,9 +31,7 @@ function randomInRange(min, max) {
 }
 
 function randomFrom(array) {
-  var pick = Math.floor(Math.random() * array.length);
-  console.log(pick);
-  return array[pick];
+  return Math.floor(Math.random() * array.length);
 }
 
 </script>
